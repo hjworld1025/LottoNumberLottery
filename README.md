@@ -17,7 +17,7 @@ Design Pattern|-
 Jetpack Components|-
 Dependency Injection|-
 Network|-
-Other|-
+Other|[Shape Drawable](https://developer.android.com/guide/topics/resources/drawable-resource#Shape)
 
 <br>
 
