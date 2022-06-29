@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Lotto Number Lottery</string>
+
+    <!--activity_main.xml-->
+    <string name="addNumber">번호 추가하기</string>
+    <string name="clearNumber">초기화</string>
+    <string name="autoNumber">자동 생성 시작</string>
 </resources>
