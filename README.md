@@ -26,5 +26,5 @@ Other|[Shape Drawable](https://developer.android.com/guide/topics/resources/draw
 - 수동선택한 번호를 제외한 나머지 번호는 랜덤으로 표시하기
 
 ```
-👉 
+👉 로또번호를 자동으로 생성하는 어플입니다.
 ```
