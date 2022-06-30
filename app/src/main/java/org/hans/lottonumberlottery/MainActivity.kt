@@ -6,6 +6,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
@@ -44,12 +45,22 @@ class MainActivity : AppCompatActivity() {
 
         initRunButton()
         initAddButton()
+        initClearButton()
     }
 
     // 자동 생성 시작 버튼 메서드
     private fun initRunButton() {
         runButton.setOnClickListener {
             val list = getRandomNumber()
+            list.forEachIndexed {index, value ->
+                val pickNumberTextView = pickNumberList[index]
+
+                pickNumberTextView.text = value.toString()
+                pickNumberTextView.isVisible = true
+                setNumberBackground(value, pickNumberTextView)
+            }
+
+            didRun = true
         }
     }
 
@@ -78,25 +89,52 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val pickNumber = pickNumberList[pickNumberSet.size]
-            pickNumber.isVisible = true
-            pickNumber.text = numberPicker.value.toString()
-
+            val pickNumberTextView = pickNumberList[pickNumberSet.size]
+            pickNumberTextView.isVisible = true
+            pickNumberTextView.text = numberPicker.value.toString()
+            setNumberBackground(numberPicker.value, pickNumberTextView)
             pickNumberSet.add(numberPicker.value)
+        }
+    }
+
+    // 초기화 버튼 메서드
+    private fun initClearButton() {
+        clearButton.setOnClickListener {
+            pickNumberSet.clear()
+
+            pickNumberList.forEach {
+                it.isVisible = false
+            }
+
+            didRun = false
         }
     }
 
     private fun getRandomNumber(): List<Int> {
         val numberList = mutableListOf<Int>().apply {
             for (i in 1..45) {
+                if (pickNumberSet.contains(i)) {
+                    continue
+                }
+
                 this.add(i)
             }
         }
 
         numberList.shuffle()
 
-        val newList = numberList.subList(0, 6)
+        val newList = pickNumberSet.toList() + numberList.subList(0, 6 - pickNumberSet.size)
 
         return newList.sorted()
+    }
+
+    private fun setNumberBackground(value: Int, pickNumberTextView: TextView) {
+        when (value) {
+            in 1..10 -> pickNumberTextView.background = ContextCompat.getDrawable(this, R.drawable.circle_yellow)
+            in 11..20 -> pickNumberTextView.background = ContextCompat.getDrawable(this, R.drawable.circle_blue)
+            in 21..30 -> pickNumberTextView.background = ContextCompat.getDrawable(this, R.drawable.circle_red)
+            in 31..40 -> pickNumberTextView.background = ContextCompat.getDrawable(this, R.drawable.circle_gray)
+            else -> pickNumberTextView.background = ContextCompat.getDrawable(this, R.drawable.circle_green)
+        }
     }
 }
