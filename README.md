@@ -1,5 +1,7 @@
 # LottoNumberLottery(로또번호추첨기)
 
+![LottoNumberLottery](https://user-images.githubusercontent.com/106309830/176615496-da4d5ed1-a7e5-4b22-921f-f946249bcfcb.png)
+
 <br>
 
 # :green_book: Contents
